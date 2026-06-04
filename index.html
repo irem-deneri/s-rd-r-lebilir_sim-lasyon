@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Büyükşehir Organik Atık ve Enerji Simülasyonu</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>İBB Organik Atık Geri Kazanım Projeksiyonu</h1>
+            <p>TÜİK ve Çevre Bakanlığı Verileri Işığında Deterministik Simülasyon</p>
+        </header>
+
+        <main class="grid-container">
+            <!-- Sol Panel: Kontroller -->
+            <section class="controls-panel card glass">
+                <h2>Yönetici Karar Parametreleri</h2>
+                <p class="subtitle">Aşağıdaki değerleri değiştirerek projeksiyon sonuçlarını anında görün.</p>
+                
+                <div class="control-group">
+                    <label for="population">1. Hedef Kapsamdaki Nüfus: <span id="population-val">100,000</span> Kişi</label>
+                    <input type="range" id="population" min="10000" max="5000000" step="10000" value="100000">
+                    <small>Uygulamanın yapılacağı ilçe/bölge nüfusu.</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="budget">2. Halkı Bilinçlendirme & Eğitim Bütçesi: <span id="budget-val">500,000</span> ₺</label>
+                    <input type="range" id="budget" min="0" max="10000000" step="50000" value="500000">
+                    <small>Bütçe arttıkça halkın atıkları evde ayırma (katılım) oranı %20'den %85'e kadar yükselir.</small>
+                </div>
+
+                <div class="control-group">
+                    <label for="ratio">3. Atık İşleme Tesis Tercihi (Kompost vs Biyogaz)</label>
+                    <div class="ratio-labels">
+                        <span>%<span id="compost-ratio-val">50</span> Kompost</span>
+                        <span>%<span id="biogas-ratio-val">50</span> Biyogaz</span>
+                    </div>
+                    <input type="range" id="ratio" min="0" max="100" step="5" value="50">
+                    <small>Toplanan atığın yüzde kaçı gübreye, yüzde kaçı enerjiye dönüştürülecek?</small>
+                </div>
+
+                <div class="constants-box">
+                    <h3>Sabit Bilimsel / İstatistiki Veriler</h3>
+                    <ul>
+                        <li><strong>Kişi Başı Günlük Atık:</strong> 1.1 kg (TÜİK)</li>
+                        <li><strong>Organik Atık Oranı:</strong> %55</li>
+                        <li><strong>Biyogaz Potansiyeli:</strong> 60 m³/ton organik atık</li>
+                        <li><strong>Kompost Dönüşümü:</strong> %30 net gübre</li>
+                        <li><strong>Bertaraf Tasarrufu:</strong> 1500 ₺/ton</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Sağ Panel: Çıktılar ve Grafikler -->
+            <section class="results-panel">
+                <div class="metrics-grid">
+                    <div class="metric-card glass">
+                        <h3>Yıllık Katılımcı Hane Oranı</h3>
+                        <div class="value" id="participation-rate">%20</div>
+                    </div>
+                    <div class="metric-card glass">
+                        <h3>Çöplükten Kurtarılan Atık</h3>
+                        <div class="value"><span id="diverted-waste">0</span> Ton</div>
+                    </div>
+                    <div class="metric-card glass highlight">
+                        <h3>Yıllık Toplam Tasarruf (Çöp Döküm)</h3>
+                        <div class="value"><span id="landfill-savings">0</span> ₺</div>
+                    </div>
+                    <div class="metric-card glass">
+                        <h3>Üretilen Kompost / Gübre Değeri</h3>
+                        <div class="value"><span id="compost-revenue">0</span> ₺</div>
+                    </div>
+                    <div class="metric-card glass">
+                        <h3>Üretilen Biyogaz Enerji Değeri</h3>
+                        <div class="value"><span id="biogas-revenue">0</span> ₺</div>
+                    </div>
+                    <div class="metric-card glass net-profit">
+                        <h3>NET YILLIK FAYDA (Tasarruf + Gelir - Gider)</h3>
+                        <div class="value"><span id="net-benefit">0</span> ₺</div>
+                    </div>
+                </div>
+
+                <div class="chart-container glass">
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
