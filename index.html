@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geri Dönüşüm Karar Destek Sistemi</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Organik ve Katı Atık Geri Dönüşüm Simülasyonu">
+</head>
+<body>
+
+    <header>
+        <h1>Sürdürülebilir Şehir Simülasyonu</h1>
+        <p class="subtitle">TÜİK ve Çevre Bakanlığı Verileriyle Deterministik Atık Analizi</p>
+    </header>
+
+    <main class="dashboard-container">
+        
+        <!-- Sol Taraf: Kontroller (Sliders) -->
+        <section class="glass-panel controls-panel">
+            
+            <div class="control-group">
+                <label for="citySelect">Analiz Edilecek Şehir</label>
+                <select id="citySelect">
+                    <option value="Istanbul">İstanbul (15.6M Nüfus)</option>
+                    <option value="Ankara">Ankara (5.8M Nüfus)</option>
+                    <option value="Izmir">İzmir (4.4M Nüfus)</option>
+                    <option value="Antalya">Antalya (2.6M Nüfus)</option>
+                    <option value="Denizli">Denizli (1M Nüfus)</option>
+                    <option value="Burdur">Burdur (277K Nüfus)</option>
+                </select>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+
+            <div class="control-group">
+                <label>Organik Atık Ayrıştırma <span><span id="val_organik">0</span>%</span></label>
+                <input type="range" id="slider_organik" min="0" max="100" value="0">
+            </div>
+
+            <div class="control-group">
+                <label>Plastik Geri Dönüşüm <span><span id="val_plastik">0</span>%</span></label>
+                <input type="range" id="slider_plastik" min="0" max="100" value="0">
+            </div>
+
+            <div class="control-group">
+                <label>Kağıt Geri Dönüşüm <span><span id="val_kagit">0</span>%</span></label>
+                <input type="range" id="slider_kagit" min="0" max="100" value="0">
+            </div>
+
+            <div class="control-group">
+                <label>Cam Geri Dönüşüm <span><span id="val_cam">0</span>%</span></label>
+                <input type="range" id="slider_cam" min="0" max="100" value="0">
+            </div>
+
+            <div class="control-group">
+                <label>Metal Geri Dönüşüm <span><span id="val_metal">0</span>%</span></label>
+                <input type="range" id="slider_metal" min="0" max="100" value="0">
+            </div>
+
+        </section>
+
+        <!-- Sağ Taraf: Sonuçlar ve Grafik -->
+        <section class="results-panel">
+            
+            <!-- Ana Görselleştirme (Endeks) -->
+            <div class="glass-panel index-visualization">
+                <div class="circle-container" id="indexCircle">
+                    <div class="circle-inner">
+                        <h2 id="indexValue">0</h2>
+                        <p>Kirlilik Endeksi</p>
+                    </div>
+                </div>
+                <div class="status-message" id="statusMessage">Kritik Kirlilik Seviyesi</div>
+            </div>
+
+            <!-- Sayısal Veriler -->
+            <div class="stats-grid">
+                
+                <div class="stat-card">
+                    <h3>Devlet Bütçesi Kazancı</h3>
+                    <div class="value" id="res_devlet" style="color: #34d399">0 ₺</div>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">İthalat Tasarrufu</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Bld. Lojistik Tasarrufu</h3>
+                    <div class="value" id="res_belediye" style="color: #60a5fa">0 ₺</div>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;" id="res_kamyon">0 Sefer İptali</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Kurtarılan Ağaç</h3>
+                    <div class="value" id="res_agac" style="color: #10b981">0</div>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">Kağıt Dönüşümü Sayesinde</p>
+                </div>
+
+                <div class="stat-card">
+                    <h3>Dönüştürülen Atık</h3>
+                    <div class="value" id="res_atik" style="color: #f8fafc">0 Ton</div>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">Toplam <span id="res_toplam_atik">0</span> Ton İçinden</p>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
